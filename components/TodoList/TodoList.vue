@@ -2,7 +2,7 @@
     <div>    
         <TodoInput ></TodoInput>
         <ul>
-            <TodoListItem v-for="(todoItem, index) in todoItems" ref="todoList" :key="index" :text="todoItem === '' ? undefined  : todoItem" :item="index" class="todo-list" ></TodoListItem>
+            <TodoListItem v-for="(todoItem, index) in todoItems" ref="todoList" :key="index" :text="todoItem === '' ? undefined  : todoItem" :item="index" class="todo-list" @update="changeText"></TodoListItem>
         </ul>   
     </div>
 </template>
@@ -14,12 +14,20 @@ export default {
     components: {
         TodoListItem,TodoInput
     },  
+    data() {
+        return {
+            newData: '',
+        }
+    },
     computed: {
         todoItems() {
             return this.$store.getters.getTodoList;
         }
     },
     methods: {
+        changeText() {
+            console.log(this.newItem)
+        }
     }
 }
 </script>
@@ -32,4 +40,5 @@ export default {
         color:#999;
         padding-bottom:5px;
     }
+    
 </style>

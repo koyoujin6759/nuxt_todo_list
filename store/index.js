@@ -1,13 +1,12 @@
 
 export const state = () => ({
     todoLists: [],
-
 })
 
 export const getters = {
     getTodoList:(state,getters) => {
         return state.todoLists;
-    }
+    },
 }
 
 export const mutations = {
@@ -19,6 +18,10 @@ export const mutations = {
     },
     clearAll(state) {
         state.todoLists = []
+    },
+
+    editDone() {
+        
     }
 }
 
