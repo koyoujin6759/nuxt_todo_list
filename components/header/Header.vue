@@ -2,7 +2,7 @@
     <div>
       <header>
           <div class="header__inner">
-            To do list!     
+               
             {{ timestamp }}    
           </div>        
       </header> 

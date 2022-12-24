@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo" placeholder="Enter your task">
+    <input type="text" v-model="newTodoItem" @keypress.enter="addTodo" placeholder="Enter your task">
     <!-- <button class="btn-add" v-on:click="addTodo" >add</button> -->    
     <span @click="addTodo">
         <i class="fas fa-plus addBtn" aria-hidden="true"></i>
