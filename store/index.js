@@ -14,11 +14,14 @@ export const mutations = {
     addTodo(state,content) {
         state.todoLists.push(content)
     },
-    removeTodo(state,idx) {
-        state.todoLists.splice(idx,1)
+    removeTodo(state,index) {
+        state.todoLists.splice(index,1)
     },
     clearAll(state) {
         state.todoLists = []
     }
 }
 
+export const actions = {
+    
+}

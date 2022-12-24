@@ -1,37 +1,25 @@
 <template>
-  <div>
-    <ul class="todo-list">
-        <li v-for="(todoItem, idx) in todoItems" :key="idx">
-            {{ todoItem }}
-            <span class="btn-remove" @click="removeTodo(todoItem,idx)">
-                <i class="fas fa-trash-alt"></i>
-            </span>
-        </li>
-    </ul>
-  </div>
+    <div>    
+        <TodoInput ></TodoInput>
+        <ul>
+            <TodoListItem v-for="(todoItem, index) in todoItems" ref="todoList" :key="index" :text="todoItem === '' ? undefined  : todoItem" :item="index" class="todo-list" ></TodoListItem>
+        </ul>   
+    </div>
 </template>
 
 <script>
+import TodoInput from '../TodoInput/TodoInput.vue';
+import TodoListItem from './TodoListItem.vue';
 export default {
-    data() {
-        return {
-            
-        }
-    },
+    components: {
+        TodoListItem,TodoInput
+    },  
     computed: {
         todoItems() {
             return this.$store.getters.getTodoList;
         }
     },
-    created() {
-        
-    },
     methods: {
-        removeTodo(todoItem, idx) {
-            this.$store.commit('removeTodo',idx)
-            
-        },
-        
     }
 }
 </script>
@@ -40,8 +28,6 @@ export default {
     .todo-list {
         text-align:left;
         padding:20px;
-    }
-    .todo-list li {
         font-size:13px;
         color:#999;
         padding-bottom:5px;
