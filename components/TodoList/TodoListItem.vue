@@ -1,8 +1,8 @@
 <template>
   <div>
     <li >
-        <input type="checkbox">
-        <p v-show="!edit">{{ text }} </p>
+        <i class="fa-solid fa-check checkBtn" @click="chkTodo = !chkTodo " :class="{done:chkTodo}"></i>
+        <p v-show="!edit" :class="{done:newText.done}">{{ text }}</p>
         <input v-show="edit" v-model="newText" type="text">
         <div class="btn-area">
             <span class="btn-edit" @click="editTodo(text)" v-show="!edit"> 
@@ -31,12 +31,13 @@ export default {
             type: Number,
             required: true,
             default: null
-        }
+        },
     },
     data() {
         return {
             editTodoItem:'',
             edit: false,
+            chkTodo: false,
         }
     },
     computed: {
@@ -56,15 +57,15 @@ export default {
         },      
         editTodo() {
             this.edit = true;
-            const editTodoItem = this.editTodoItem;
-            console.log(editTodoItem)
         },
         editDone() {
             this.edit = false;
-            const newItem = this.editTodoItem;
-            // console.log(newItem,'txt')
-            this.$emit('update',newItem)
-        }
+            const editItem = this.editTodoItem;
+            console.log(editItem)
+            // this.$emit('edit-item',editItem)
+            this.$store.commit('editDone',editItem)           
+        },
+        
     }
 }
 </script>
@@ -87,6 +88,18 @@ export default {
     }
     .todo-list li p {
         display:inline-block;
+    }
+    .todo-list li .checkBtn {
+        cursor: pointer;
+    }
+    .todo-list li .checkBtn.done {
+        font-weight:900;
+        color:#000;
+    }
+    .todo-list li .checkBtn.done + p {
+        font-weight:900;
+        color:#000;
+        text-decoration:line-through
     }
     .btn-area {
         position:absolute; 
