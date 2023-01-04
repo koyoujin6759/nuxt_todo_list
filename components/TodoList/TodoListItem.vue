@@ -1,14 +1,14 @@
 <template>
   <div>
     <li >
-        <i class="fa-solid fa-check checkBtn" @click="chkTodo = !chkTodo " :class="{done:chkTodo}"></i>
-        <p v-show="!edit" :class="{done:newText.done}">{{ text }}</p>
+        <i class="fa-solid fa-check checkBtn" @click="DoneTodo(index)" :class="{done:item.clear}"></i>
+        <p v-show="!edit" :class="{done:item.clear}">{{ item.text }}</p>
         <input v-show="edit" v-model="newText" type="text">
         <div class="btn-area">
-            <span class="btn-edit" @click="editTodo(text)" v-show="!edit"> 
+            <span class="btn-edit" @click="editTodo(item.text)" v-show="!edit"> 
                 <i class="fa-solid fa-pen"></i>
             </span>
-            <span class="btn-done" @click="editDone()" v-show="edit">
+            <span class="btn-done" @click="editDone(index)" v-show="edit">
                 <i class="fa-solid fa-circle-check"></i>
             </span>
             <span class="btn-remove" @click="removeTodo(item)">
@@ -22,12 +22,12 @@
 <script>
 export default {    
     props: {
-        text: {
-            type: String,
-            required: true,
-            default: "none"
-        },
         item: {
+            type: Object,
+            required: true,
+            default: null
+        },
+        index: {
             type: Number,
             required: true,
             default: null
@@ -37,14 +37,13 @@ export default {
         return {
             editTodoItem:'',
             edit: false,
-            chkTodo: false,
         }
     },
     computed: {
         newText: {
             get() {
                 // console.log('get')
-                return this.text;
+                return this.item.text;
             },
             set (editTodoItem) {
                 this.editTodoItem = editTodoItem
@@ -58,14 +57,22 @@ export default {
         editTodo() {
             this.edit = true;
         },
-        editDone() {
+        editDone(index) {
             this.edit = false;
-            const editItem = this.editTodoItem;
-            console.log(editItem)
-            // this.$emit('edit-item',editItem)
-            this.$store.commit('editDone',editItem)           
+            const editItem = this.editTodoItem
+            console.log(editItem) // 수정한 item
+            const editData = {
+                index:index,
+                item:{
+                    text:editItem
+                }
+            }
+            // console.log(editData);
+            this.$store.commit('editDone',editData)           
         },
-        
+        DoneTodo(index) {
+            this.$store.commit('DoneTodo',index)
+        }
     }
 }
 </script>

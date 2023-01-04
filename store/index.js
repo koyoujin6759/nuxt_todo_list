@@ -19,9 +19,13 @@ export const mutations = {
     clearAll(state) {
         state.todoLists = []
     },
-    editDone(state,editItem) {
-        state.todoLists.innerText = editItem
+    editDone(state,editData) {
+        const {index, item} = editData
+        state.todoLists[index].text = item.text
         console.log(state.todoLists)
+    },
+    DoneTodo(state,index) {
+        state.todoLists[index].clear = !state.todoLists[index].clear
     }
 }
 

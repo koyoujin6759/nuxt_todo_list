@@ -18,7 +18,11 @@ export default {
     methods: {
         addTodo() {
             console.log(this.newTodoItem)
-            this.$store.commit('addTodo',this.newTodoItem)
+            const data = {
+                text:this.newTodoItem,
+                clear:false
+            }
+            this.$store.commit('addTodo',data)
             this.clearInput();           
             // this.$emit('addTodoItem') // 이벤트를 todoinput 컴포넌트를 쓰는 부모컴포넌트로 올림
         },

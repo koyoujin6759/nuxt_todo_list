@@ -2,7 +2,7 @@
     <div>    
         <TodoInput ></TodoInput>
         <ul>
-            <TodoListItem v-for="(todoItem, index) in todoItems" ref="todoList" :key="index" :text="todoItem === '' ? undefined  : todoItem" :item="index" class="todo-list" ></TodoListItem>
+            <TodoListItem v-for="(todoItem, index) in todoItems" :key="todoItem.i" :item="todoItem" :index="index" class="todo-list" ></TodoListItem>
         </ul>   
     </div>
 </template>
@@ -19,6 +19,15 @@ export default {
             
         }
     },
+    watch: {
+        todoItems:{
+            deep:true,
+            handler(){
+                console.log('aaa')
+            }
+            
+        }
+    },  
     computed: {
         todoItems() {
             return this.$store.getters.getTodoList;
