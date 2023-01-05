@@ -3,7 +3,7 @@
     <li >
         <i class="fa-solid fa-check checkBtn" @click="DoneTodo(index)" :class="{done:item.clear}"></i>
         <p v-show="!edit" :class="{done:item.clear}">{{ item.text }}</p>
-        <input v-show="edit" v-model="newText" type="text">
+        <input v-show="edit" v-model="newText" type="text" @keypress.enter="editDone(index)">
         <div class="btn-area">
             <span class="btn-edit" @click="editTodo(item.text)" v-show="!edit"> 
                 <i class="fa-solid fa-pen"></i>
